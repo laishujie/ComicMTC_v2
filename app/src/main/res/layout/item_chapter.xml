@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.coorchice.library.SuperTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_title"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dist_40"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:text="@string/app_name"
+    android:textColor="@color/color_333333"
+    android:textSize="@dimen/sp_14"
+    app:stv_corner="@dimen/dist_5"
+    app:stv_stroke_color="@color/color_979feb"
+    app:stv_stroke_width="@dimen/dist_1" />
+
+
+

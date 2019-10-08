@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.lai.comicmtc_v2.ui.widget.TouchRecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include layout="@layout/comic_preview_title"
+        />
+
+    <TextView
+        android:id="@+id/tv_curr_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:alpha="0.5"
+        android:background="@color/color_333333"
+        android:gravity="center"
+        android:padding="@dimen/dist_5"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_12"
+        android:textStyle="bold" />
+
+    <include layout="@layout/comic_activity_preview_bottom_menu" />
+
+    <include layout="@layout/comic_activity_preview_right_menu" />
+
+
+</FrameLayout>

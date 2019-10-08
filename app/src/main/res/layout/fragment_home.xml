@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title=" ">
+
+
+            <com.stx.xhb.androidx.XBanner
+                android:id="@+id/x_banner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dist_250"
+                app:AutoPlayTime="3000"
+                app:isShowIndicatorOnlyOne="true"
+                app:isShowNumberIndicator="true"
+                app:pageChangeDuration="800"
+                app:pointTopBottomPadding="@dimen/dist_10"
+                app:pointsPosition="RIGHT"
+                app:tipTextSize="12sp" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tl_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_fafafa"
+                android:visibility="invisible"
+                app:layout_collapseMode="pin" />
+
+            <com.lai.comicmtc_v2.ui.widget.ArcsView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dist_25"
+                android:layout_gravity="bottom"
+                app:layout_collapseMode="pin" />
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior=".ui.comm.RootIconBehavior">
+
+        <com.coorchice.library.SuperTextView
+            android:id="@+id/tv_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dist_32"
+            android:layout_marginStart="@dimen/dist_16"
+            android:layout_marginTop="@dimen/dist_12"
+            android:layout_marginEnd="@dimen/dist_16"
+            android:gravity="center"
+            android:text="搜索"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:stv_corner="@dimen/dist_30"
+            app:stv_solid="@color/white_30" />
+
+
+        <LinearLayout
+            android:id="@+id/top_layout_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dist_15"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@id/top_layout_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_search">
+
+            <ImageView
+                android:id="@+id/iv_1"
+                android:layout_width="@dimen/dist_30"
+                android:layout_height="@dimen/dist_30"
+                android:scaleType="centerInside"
+                android:src="@mipmap/icon_discover_column_rank_white" />
+
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/dist_5"
+                android:gravity="center"
+                android:text="排行"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/top_layout_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dist_15"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/top_layout_3"
+            app:layout_constraintStart_toEndOf="@id/top_layout_1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_search">
+
+
+            <ImageView
+                android:id="@+id/iv_2"
+                android:layout_width="@dimen/dist_30"
+                android:layout_height="@dimen/dist_30"
+                android:scaleType="centerInside"
+                android:src="@mipmap/icon_discover_column_classify_white" />
+
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分类"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/top_layout_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dist_15"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/top_layout_4"
+            app:layout_constraintStart_toEndOf="@id/top_layout_2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_search">
+
+            <ImageView
+                android:id="@+id/iv_3"
+                android:layout_width="@dimen/dist_30"
+                android:layout_height="@dimen/dist_30"
+                android:scaleType="centerInside"
+                android:src="@mipmap/icon_discover_column_vip_white" />
+
+            <TextView
+                android:id="@+id/tv_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/top_layout_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dist_15"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/top_layout_3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_search">
+
+            <ImageView
+                android:id="@+id/iv_4"
+                android:layout_width="@dimen/dist_30"
+                android:layout_height="@dimen/dist_30"
+                android:scaleType="centerInside"
+                android:src="@mipmap/icon_discover_column_subscribe_white" />
+
+            <TextView
+                android:id="@+id/tv_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订阅"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="39dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

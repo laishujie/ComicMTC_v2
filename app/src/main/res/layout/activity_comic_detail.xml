@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="231dp"
+        android:background="@color/black" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/ac_appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dist_15"
+                android:layout_marginTop="@dimen/dist_60"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/dist_5"
+                android:paddingBottom="@dimen/dist_5">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/dist_158"
+                    android:layout_height="@dimen/dist_207"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/dist_15"
+                    app:cardBackgroundColor="@null"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="false">
+
+                    <com.lai.comicmtc_v2.ui.widget.BookView
+                        android:id="@+id/iv_cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dist_6"
+                    android:layout_marginTop="@dimen/dist_10"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/color_333333"
+                        android:textSize="18sp"
+                        tools:text="@string/app_name" />
+
+                    <TextView
+                        android:id="@+id/tv_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dist_5"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:textSize="@dimen/textSize_10"
+                        tools:text="@string/app_name" />
+
+                    <View
+                        android:id="@+id/activity_desc_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginEnd="@dimen/dp_10"
+                        android:background="#e5e5e5" />
+
+                    <TextView
+                        android:id="@+id/tv_des_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_marginEnd="@dimen/dp_10"
+                        android:ellipsize="end"
+                        android:text="@string/app_name"
+                        android:textColor="#999999"
+                        android:textSize="@dimen/textSize_10" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/ac_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dist_56"
+                android:gravity="center_vertical"
+                app:contentInsetStartWithNavigation="@dimen/dist_1"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_action_back">
+
+                <TextView
+                    android:id="@+id/ac_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dist_48"
+                    android:gravity="center_vertical"
+                    android:text="@string/app_name"
+                    android:textColor="@color/color7979"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    tools:text="@string/app_name" />
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <com.coorchice.library.SuperTextView
+            android:id="@+id/btn_find"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dist_40"
+            android:layout_marginLeft="@dimen/dist_15"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dist_15"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:gravity="center"
+            android:text="预览"
+            android:textColor="@color/white"
+            app:layout_scrollFlags="scroll"
+            app:stv_corner="@dimen/dist_10"
+            app:stv_solid="@color/color_979feb" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--  <android.support.v4.widget.NestedScrollView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginLeft="@dimen/dp_10"
+          android:layout_marginRight="@dimen/dp_10"
+          app:layout_behavior="@string/appbar_scrolling_view_behavior">
+  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dist_5"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dist_15"
+            android:layout_marginRight="@dimen/dist_15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="@dimen/dist_20"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:background="@color/color7979" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="章节列表"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_reverse"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dist_25"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_sort" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_10" />
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dist_0"
+        android:background="@color/white" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

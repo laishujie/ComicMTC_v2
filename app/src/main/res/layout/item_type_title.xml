@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/dist_5"
+        android:drawablePadding="@dimen/dist_3"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/dist_25"
+        android:scaleType="fitCenter"
+        android:layout_height="@dimen/dist_25"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/dist_5" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_icon"
+        android:text="热门"
+        android:layout_centerVertical="true"
+        android:textColor="#333333"
+        android:textSize="@dimen/textSize_18"
+        android:textStyle="bold" />
+
+</RelativeLayout>

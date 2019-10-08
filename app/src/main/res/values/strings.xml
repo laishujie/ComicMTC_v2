@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ComicMTC_v2</string>
+    <string name="tag_home">首页</string>
+    <string name="tag_sort">分类</string>
+    <string name="text_loading">loading</string>
+
+    <string name="find">发现</string>
+    <string name="search">搜索</string>
+    <string name="catalog">目录</string>
+    <string name="brightness">亮度</string>
+    <string name="change">切换</string>
+    <string name="model">模式</string>
+    <string name="preview">预览</string>
+    <string name="clean_history">清除历史记录</string>
+    <string name="click_input">点击输入</string>
+    <string name="current_set_number">%s  %d / %d</string>
+    <string name="change_item">换一批</string>
+    <string name="details">详情</string>
+    <string name="last_tip">已经是最后一章！</string>
+    <string name="no_support_vip_tip">不支持vip章节</string>
+</resources>

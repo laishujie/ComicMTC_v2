@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ac_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:visibility="invisible"
+        app:contentInsetStartWithNavigation="@dimen/dist_1"
+        app:navigationIcon="@drawable/ic_action_back">
+
+        <TextView
+            android:id="@+id/ac_title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dist_48"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textColor="@color/color7979"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            tools:text="@string/app_name" />
+
+    </androidx.appcompat.widget.Toolbar>
+</merge>

@@ -1,0 +1,164 @@
+package com.lai.comicmtc_v2.ui.detail
+
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.google.android.material.appbar.AppBarLayout
+import com.gyf.barlibrary.ImmersionBar
+import com.lai.comicmtc_v2.R
+import com.lai.comicmtc_v2.bean.detail.ComicDetailResponse.ChapterListBean
+import com.lai.comicmtc_v2.ui.comm.BaseVMActivity
+import com.lai.comicmtc_v2.ui.home.HomeSortItemDecoration
+import com.lai.comicmtc_v2.ui.preview.ComicPreViewActivity
+import com.lai.comicmtc_v2.utils.ArithHelper
+import com.lai.comicmtc_v2.utils.DisplayUtils
+import com.lai.comicmtc_v2.utils.GlideUtils
+import kotlinx.android.synthetic.main.activity_comic_detail_new.*
+import kotlin.math.abs
+
+/**
+ *
+ * @author  Lai
+ *
+ * @time 2019/10/3 21:12
+ * @describe describe 详情页
+ *
+ */
+class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickListener,
+    View.OnClickListener {
+
+    //详情ViewModel
+    var mDetailViewModel: ComicDetailViewModel? = null
+    //当前的漫画id
+    var mComicId: Int = 0
+
+
+    /**
+     * 点击事件
+     */
+    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
+        adapter?.getItem(position)?.apply {
+            this as ChapterListBean
+            if(type == "3"){
+                toast(getString(R.string.no_support_vip_tip))
+            }else{
+                ComicPreViewActivity.openActivity(
+                    this@ComicDetailActivity,
+                    this,
+                    adapter.data as List<ChapterListBean>
+                )
+            }
+
+        }
+    }
+
+
+
+
+    companion object {
+        const val COMIC_ID = "comicId"
+
+        fun openActivity(content: Activity, comId: Int?) {
+            val intent = Intent(content, ComicDetailActivity::class.java)
+            intent.putExtra(COMIC_ID, comId)
+            content.startActivity(intent)
+        }
+    }
+
+
+    override fun getLayout(): Int {
+        return R.layout.activity_comic_detail_new
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
+        mComicId = intent.getIntExtra(COMIC_ID, 0)
+        if (mComicId == 0) {
+            toast("id为空")
+            finish()
+        }
+
+        mDetailViewModel = createViewModel()
+
+        setToolBar(ac_toolbar, getString(R.string.details))
+
+        //ImmersionBar.setStatusBarView(this, v_status_bar)
+        //ImmersionBar.setTitleBar(this, ac_appBar)
+        val statusBarHeight = ImmersionBar.getStatusBarHeight(this)
+        cl_layout.setPadding(0, statusBarHeight, 0, 0)
+
+        ImmersionBar.setTitleBar(this, ac_toolbar)
+
+        ac_appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val totalScrollRange = appBarLayout.totalScrollRange
+            val percent = 1 - ArithHelper.div(abs(verticalOffset), totalScrollRange)
+            cl_layout.alpha = percent
+        })
+
+        mDetailViewModel?.mComicDetailResponse?.observe(this, Observer { it ->
+
+            hideLoading()
+            val comic = it.comic
+
+            GlideUtils.loadImage(this, comic.cover, iv_cover, 0f)
+            tv_title.text = comic.name
+            tv_author.text = comic.author.name
+            tv_des_content.text = comic.description
+            GlideUtils.loadImage(this, comic.wideCover, iv_bg, 0f)
+
+            val chapterAdapter = ChapterAdapter(it.chapter_list)
+            chapterAdapter.onItemChildClickListener = this
+            rv_list.layoutManager = GridLayoutManager(this, 2)
+            rv_list.addItemDecoration(ChapterDecoration())
+            chapterAdapter.bindToRecyclerView(rv_list)
+
+            it.comic.classifyTags?.also { list ->
+                val tagAdapter = TagAdapter(list)
+                rv_tag_list.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+                rv_tag_list.addItemDecoration(
+                    HomeSortItemDecoration(
+                        DisplayUtils.dp2px(5f)
+                        , DisplayUtils.dp2px(15f), DisplayUtils.dp2px(15f)
+                    )
+                )
+                tagAdapter.bindToRecyclerView(rv_tag_list)
+            }
+        })
+
+        request()
+        iv_reverse.setOnClickListener(this)
+
+        btn_preview.setOnClickListener(this)
+    }
+
+
+    /**
+     * 请求网络
+     */
+    private fun request() {
+        showLoading()
+        mDetailViewModel?.getComicDetail(mComicId)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.iv_reverse -> {
+                rv_list.adapter?.apply {
+                    val adapter = this as ChapterAdapter
+                    val data = adapter.data
+                    data.reverse<ChapterListBean>()
+                    adapter.notifyDataSetChanged()
+                }
+            }
+            R.id.btn_preview->{
+                toast("预览")
+            }
+        }
+    }
+
+
+}

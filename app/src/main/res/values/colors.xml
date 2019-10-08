@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#C2BEBE</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="color_F6F5F7">#F6F5F7</color>
+    <color name="color_ffffff">#B3FFFFFF</color>
+    <color name="color_333333">#333333</color>
+
+    <!-- BEGIN * 常用颜色值 -->
+    <color name="transparent">#00000000</color>
+    <color name="mask">#55000000</color>
+    <color name="white">#fff</color>
+    <color name="black">#000000</color>
+    <color name="red">#f00</color>
+    <color name="color_FF5152">#FF5152</color>
+    <color name="green">#0f0</color>
+    <color name="blue">#00f</color>
+    <color name="orange">#FF5722</color>
+    <!-- END * 常用颜色值 -->
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="white_30">#4FFFFFFF</color>
+    <color name="black_70">#B3000000</color>
+
+    <color name="color_ffbbbbbb">#ffbbbbbb</color>
+    <color name="color_e6e6e6">#e6e6e6e6</color>
+    <color name="color_f7f7f7">#f7f7f7</color>
+    <color name="color_ecfdf5">#ecfdf5</color>
+    <color name="color_fafafa"> #fafafa</color>
+    <color name="color7979"> #797979</color>
+
+    <color name="color_979feb">#979feb</color>
+
+    <color name="bg_mark">#c8b49a84</color>
+
+    <color name="color_979feb_press">#AFB5E9</color>
+
+
+
+</resources>
