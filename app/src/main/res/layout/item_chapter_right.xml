@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.coorchice.library.SuperTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tv_title"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_40"
@@ -7,5 +8,6 @@
     android:paddingStart="@dimen/dp_10"
     android:paddingEnd="@dimen/dp_10"
     android:text="@string/app_name"
+    app:stv_pressBgColor="@color/color_3333_80"
     android:textColor="@color/color_333333"
     android:textSize="@dimen/sp_14" />

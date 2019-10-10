@@ -32,7 +32,7 @@
     	</list>
     -->
     <list>
-
+        <mapping class="com.lai.comicmtc_v2.db.ReadChapter" />
         <!--  <mapping class="com.litepaltest.model.Classroom" />
               <mapping class="com.litepaltest.model.Teacher" />
               <mapping class="com.litepaltest.model.IdCard" />

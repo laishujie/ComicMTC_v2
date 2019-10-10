@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter.base.BaseViewHolder
 import com.gyf.barlibrary.ImmersionBar
 import com.lai.comicmtc_v2.ui.widget.dialog.LoadingDialog
 import me.yokeyword.fragmentation.SupportActivity
@@ -34,6 +36,13 @@ abstract class BaseActivity : SupportActivity(), IBaseView {
     }
 
 
+    inline fun <reified T : RecyclerView.Adapter<BaseViewHolder>> getAdapter(recyclerView: RecyclerView): T? {
+        recyclerView.adapter?.apply {
+            return this as T
+        }
+        return null
+    }
+
     @LayoutRes
     abstract fun getLayout(): Int
 
@@ -41,10 +50,10 @@ abstract class BaseActivity : SupportActivity(), IBaseView {
 
     private fun initStatusBar() {
         ImmersionBar.with(this)
-            .flymeOSStatusBarFontColor(com.lai.comicmtc_v2.R.color.black)  //修改flyme OS状态栏字体颜色
-            .statusBarDarkFont(true)
-            .transparentStatusBar()
-            .keyboardEnable(true).init()
+                .flymeOSStatusBarFontColor(com.lai.comicmtc_v2.R.color.black)  //修改flyme OS状态栏字体颜色
+                .statusBarDarkFont(true)
+                .transparentStatusBar()
+                .keyboardEnable(true).init()
     }
 
     override fun onDestroy() {
@@ -54,9 +63,9 @@ abstract class BaseActivity : SupportActivity(), IBaseView {
 
 
     fun setToolBar(
-        toolBar: androidx.appcompat.widget.Toolbar,
-        title: String?,
-        needBackButton: Boolean = true
+            toolBar: androidx.appcompat.widget.Toolbar,
+            title: String?,
+            needBackButton: Boolean = true
     ) {
         setSupportActionBar(toolBar)
         val supportActionBar = supportActionBar

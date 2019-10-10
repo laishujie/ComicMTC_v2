@@ -18,4 +18,9 @@
     <string name="details">详情</string>
     <string name="last_tip">已经是最后一章！</string>
     <string name="no_support_vip_tip">不支持vip章节</string>
+
+    <string name="save_chapter_fail">保存阅读记录失败</string>
+    
+    <string name="read_on_str">继续：%s</string>
+
 </resources>

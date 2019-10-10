@@ -1,16 +1,19 @@
 package com.lai.comicmtc_v2.ui.preview
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomViewTarget
+import com.bumptech.glide.request.transition.Transition
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.lai.comicmtc_v2.R
 import com.lai.comicmtc_v2.bean.preview.ComicPreViewResponse
 import com.lai.comicmtc_v2.utils.ArithHelper
 import com.lai.comicmtc_v2.utils.DisplayUtils
 import com.lai.comicmtc_v2.utils.GlideUtils
 import kotlin.math.roundToInt
-
-
 
 
 /**
@@ -22,10 +25,7 @@ import kotlin.math.roundToInt
  *
  */
 class ComicPreAdapter(data: List<ComicPreViewResponse.ImageListBean>) :
-    BaseQuickAdapter<ComicPreViewResponse.ImageListBean, BaseViewHolder>(
-        com.lai.comicmtc_v2.R.layout.item_preview,
-        data
-    ) {
+        BaseQuickAdapter<ComicPreViewResponse.ImageListBean, BaseViewHolder>(R.layout.item_preview, data) {
 
 
     private val screenWidth = DisplayUtils.getScreenWidth()
@@ -35,17 +35,37 @@ class ComicPreAdapter(data: List<ComicPreViewResponse.ImageListBean>) :
         helper?.apply {
             item?.also {
                 //根据服务起返回的图片宽高等比例固定宽度，高度自适应放大
-                val imageView = getView<ImageView>(com.lai.comicmtc_v2.R.id.iv_cover)
+                val imageView = getView<ImageView>(R.id.iv_cover)
                 val scale = ArithHelper.div(screenWidth, it.width)
                 val vh = (it.height * scale).roundToInt()
                 val layoutParams = imageView.layoutParams
                 layoutParams.height = vh
                 imageView.layoutParams = layoutParams
+                setText(R.id.tv_position,adapterPosition.toString())
+                setGone(R.id.tv_position, true)
+                GlideUtils.loadImage(mContext, it.img50, 0f, R.color.black, R.color.black, it.width, it.height,
+                        object : CustomViewTarget<ImageView, Bitmap>(imageView) {
+                            override fun onLoadFailed(errorDrawable: Drawable?) {
 
-                GlideUtils.loadImage(
-                    mContext, it.img50, imageView,
-                    0f,
-                    com.lai.comicmtc_v2.R.color.black, com.lai.comicmtc_v2.R.color.black,it.width,it.height
+                            }
+
+                            override fun onResourceCleared(placeholder: Drawable?) {
+                            }
+
+                            override fun onResourceReady(
+                                    resource: Bitmap,
+                                    transition: Transition<in Bitmap>?
+                            ) {
+                                setGone(R.id.tv_position, false)
+                                imageView.setImageBitmap(resource)
+                            }
+
+                            override fun onResourceLoading(placeholder: Drawable?) {
+                                super.onResourceLoading(placeholder)
+                                imageView?.setImageDrawable(placeholder)
+                            }
+
+                        }
                 )
             }
         }
@@ -53,7 +73,7 @@ class ComicPreAdapter(data: List<ComicPreViewResponse.ImageListBean>) :
 
     override fun onViewRecycled(holder: BaseViewHolder) {
         super.onViewRecycled(holder)
-        holder.getView<ImageView>(com.lai.comicmtc_v2.R.id.iv_cover)?.apply {
+        holder.getView<ImageView>(R.id.iv_cover)?.apply {
             Glide.with(mContext).clear(this)
         }
     }

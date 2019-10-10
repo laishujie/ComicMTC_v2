@@ -112,31 +112,19 @@
                     app:layout_constraintBottom_toTopOf="@id/btn_preview"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <com.coorchice.library.SuperTextView
-                    android:id="@+id/tv_favorite"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dist_40"
-                    android:layout_marginBottom="@dimen/dist_15"
-                    android:gravity="center"
-                    android:text="收藏"
-                    android:textColor="@color/color_333333"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constraintBottom_toBottomOf="@+id/cardView"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_preview"
-                    app:layout_constraintStart_toEndOf="@+id/cardView"
-                    app:layout_constraintTop_toTopOf="@+id/btn_preview" />
 
                 <com.coorchice.library.SuperTextView
                     android:id="@+id/btn_preview"
                     android:layout_width="@dimen/dist_0"
                     android:layout_height="@dimen/dist_40"
+                    android:layout_marginStart="@dimen/dist_15"
                     android:layout_marginBottom="@dimen/dist_15"
                     android:gravity="center"
-                    android:text="预览"
+                    android:text="立刻阅读"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/cardView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_favorite"
+                    app:layout_constraintStart_toEndOf="@id/cardView"
                     app:layout_scrollFlags="scroll"
                     app:stv_corner="@dimen/dist_20"
                     app:stv_left_bottom_corner="true"
@@ -173,16 +161,34 @@
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_action_back_white">
 
-                <TextView
-                    android:id="@+id/ac_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dist_48"
-                    android:gravity="center_vertical"
-                    android:text="@string/app_name"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_16"
-                    android:textStyle="bold"
-                    tools:text="@string/app_name" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ac_title"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dist_48"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/app_name"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
+                        tools:text="@string/app_name" />
+
+                    <com.coorchice.library.SuperTextView
+                        android:id="@+id/tv_favorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dist_48"
+                        android:layout_marginEnd="@dimen/dist_15"
+                        android:gravity="center_vertical"
+                        android:text="收藏"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>

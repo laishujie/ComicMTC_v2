@@ -1,10 +1,12 @@
 package com.lai.comicmtc_v2.utils
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomViewTarget
 import com.bumptech.glide.request.target.Target
 import com.lai.comicmtc_v2.R
 import com.lai.comicmtc_v2.ui.comm.RoundedCornersTransformation
@@ -23,12 +25,12 @@ object GlideUtils {
     fun loadImage(
         context: Context,
         url: String?,
-        view: ImageView,
         roundingRadius: Float = 8f,
         placeholder: Int,
         error: Int,
         width: Int = Target.SIZE_ORIGINAL,
-        height: Int = Target.SIZE_ORIGINAL
+        height: Int = Target.SIZE_ORIGINAL,
+        viewTag: CustomViewTarget<ImageView, Bitmap>
     ) {
         val roundedCorners = RoundedCornersTransformation(DisplayUtils.dp2px(roundingRadius), 0)
         val options = RequestOptions()
@@ -36,8 +38,8 @@ object GlideUtils {
             .placeholder(placeholder)
             .error(error)
             .override(width, height)
-        Glide.with(context).load(url).apply(options)
-            .into(view)
+        Glide.with(context).asBitmap().load(url).apply(options)
+            .into(viewTag)
     }
 
 

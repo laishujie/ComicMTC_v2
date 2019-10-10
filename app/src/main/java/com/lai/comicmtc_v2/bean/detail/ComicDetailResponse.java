@@ -3,6 +3,8 @@ package com.lai.comicmtc_v2.bean.detail;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.lai.comicmtc_v2.db.ReadChapter;
+
 import java.util.List;
 
 /**
@@ -486,6 +488,12 @@ public class ComicDetailResponse {
                     return true;
                 }
             }
+            if(obj instanceof ReadChapter){
+                ReadChapter bean =  (ReadChapter)obj;
+                if(bean.getChapter_id().equals(chapter_id)){
+                    return true;
+                }
+            }
             return super.equals(obj);
         }
 
@@ -507,6 +515,15 @@ public class ComicDetailResponse {
         private int is_new;
         private boolean has_locked_image;
         private int countImHightArr;
+        private boolean isRead;
+
+        public boolean isRead() {
+            return isRead;
+        }
+
+        public void setRead(boolean read) {
+            isRead = read;
+        }
 
         public static final Creator<ChapterListBean> CREATOR = new Creator<ChapterListBean>() {
 
@@ -530,6 +547,9 @@ public class ComicDetailResponse {
                 bean.has_locked_image = booleans[0];
                 bean.countImHightArr = source.readInt();
 
+                boolean[] booleans2 = new boolean[1];
+                source.readBooleanArray(booleans2);
+                bean.isRead = booleans2[0];
                 return bean;
             }
 
@@ -554,6 +574,7 @@ public class ComicDetailResponse {
             dest.writeInt(is_new);
             dest.writeBooleanArray(new boolean[]{has_locked_image});
             dest.writeInt(countImHightArr);
+            dest.writeBooleanArray(new boolean[]{isRead});
         }
 
         /*public List<List<ImHightArrBean>> getImHightArr() {

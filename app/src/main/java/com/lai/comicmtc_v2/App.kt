@@ -9,6 +9,7 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.LogStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
+import org.litepal.LitePal
 import kotlin.properties.Delegates
 
 class App : Application() {
@@ -24,6 +25,12 @@ class App : Application() {
         super.onCreate()
         CONTEXT = applicationContext
         initLogger()
+        InItDB()
+    }
+
+
+    private fun InItDB(){
+        LitePal.initialize(this)
     }
 
     /**

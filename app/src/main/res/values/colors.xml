@@ -7,6 +7,9 @@
     <color name="color_ffffff">#B3FFFFFF</color>
     <color name="color_333333">#333333</color>
 
+    <color name="color_3333_80">#80333333</color>
+
+
     <!-- BEGIN * 常用颜色值 -->
     <color name="transparent">#00000000</color>
     <color name="mask">#55000000</color>

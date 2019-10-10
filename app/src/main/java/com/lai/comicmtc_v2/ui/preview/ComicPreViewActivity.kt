@@ -14,6 +14,7 @@ import com.gyf.barlibrary.ImmersionBar
 import com.lai.comicmtc_v2.R
 import com.lai.comicmtc_v2.bean.detail.ComicDetailResponse
 import com.lai.comicmtc_v2.ui.comm.BaseVMActivity
+import com.lai.comicmtc_v2.ui.detail.ChapterAdapter
 import com.lai.comicmtc_v2.utils.DisplayUtils
 import com.lai.comicmtc_v2.utils.ViewUtils
 import kotlinx.android.synthetic.main.activity_preview.*
@@ -31,31 +32,35 @@ import kotlinx.android.synthetic.main.comic_preview_title.*
  *
  */
 class ComicPreViewActivity : BaseVMActivity(), View.OnClickListener,
-    BaseQuickAdapter.RequestLoadMoreListener {
+        BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener {
+
     private val mViewModel by lazy { createViewModel<ComicPreViewViewModel>() }
     //已读章节
     private val mReadChapterList = ArrayList<ComicDetailResponse.ChapterListBean>()
     //当前请求最新的章节
-    lateinit var mCurrRequestNewChapterBean: ComicDetailResponse.ChapterListBean
+    private lateinit var mCurrRequestNewChapterBean: ComicDetailResponse.ChapterListBean
     //所有章节集合
-    private var mAllChapterList: List<ComicDetailResponse.ChapterListBean>? = null
-
-
+    private var mAllChapterList: ArrayList<ComicDetailResponse.ChapterListBean>? = null
     private var mComicPreAdapter: ComicPreAdapter? = null
+    //当前章节对应的位置
+    private var chapterPosition = 0
+
 
     companion object {
         private const val CHAPTER_LIST = "chapter_list"
         private const val CHAPTER = "chapter"
+        private const val IS_REVERSE_LIST = "isReverselist"
 
         fun openActivity(
-            content: Activity,
-            chapter: ComicDetailResponse.ChapterListBean?,
-            data: List<ComicDetailResponse.ChapterListBean>
+                content: Activity,
+                chapter: ComicDetailResponse.ChapterListBean?,
+                data: List<ComicDetailResponse.ChapterListBean>,
+                isReverseList: Boolean
         ) {
             val intent = Intent(content, ComicPreViewActivity::class.java)
             intent.putExtra(CHAPTER, chapter)
+            intent.putExtra(IS_REVERSE_LIST, isReverseList)
             intent.putParcelableArrayListExtra(CHAPTER_LIST, ArrayList(data))
-
             content.startActivity(intent)
         }
     }
@@ -67,6 +72,11 @@ class ComicPreViewActivity : BaseVMActivity(), View.OnClickListener,
     override fun init(savedInstanceState: Bundle?) {
         mCurrRequestNewChapterBean = intent.getParcelableExtra(CHAPTER)
         mAllChapterList = intent.getParcelableArrayListExtra(CHAPTER_LIST)
+        if (intent.getBooleanExtra(IS_REVERSE_LIST, false)) {
+            mAllChapterList?.reverse()
+
+        }
+
         mReadChapterList.add(mCurrRequestNewChapterBean)
 
         mViewModel.setCurrChapterInfo(mCurrRequestNewChapterBean)
@@ -81,13 +91,14 @@ class ComicPreViewActivity : BaseVMActivity(), View.OnClickListener,
             else
                 switchBAndTMenu()
         }
+
         rv_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
                     val findFirstVisibleItemPosition =
-                        linearLayoutManager.findFirstVisibleItemPosition()
+                            linearLayoutManager.findFirstVisibleItemPosition()
 
                     mComicPreAdapter?.getItem(findFirstVisibleItemPosition)?.also {
                         updateCurrPagerProcess(it.listIndex, it.listSize, it.comicName)
@@ -129,10 +140,10 @@ class ComicPreViewActivity : BaseVMActivity(), View.OnClickListener,
      */
     private fun updateCurrPagerProcess(index: Int, size: Int, title: String) {
         val format = String.format(
-            getString(R.string.current_set_number),
-            title,
-            index,
-            size
+                getString(R.string.current_set_number),
+                title,
+                index,
+                size
         )
         sb_bar.max = size
         sb_bar.progress = index
@@ -154,7 +165,7 @@ class ComicPreViewActivity : BaseVMActivity(), View.OnClickListener,
     private fun hideLayout() {
         ll_bottom.translationY = ViewUtils.getViewMeasuredHeight(ll_bottom).toFloat()
         ac_toolbar.translationY =
-            -ViewUtils.getViewMeasuredHeight(ac_toolbar) - ImmersionBar.getStatusBarHeight(this).toFloat()
+                -ViewUtils.getViewMeasuredHeight(ac_toolbar) - ImmersionBar.getStatusBarHeight(this).toFloat()
         ll_right_layout.translationX = (DisplayUtils.getScreenWidth()).toFloat()
         ImmersionBar.hideStatusBar(window)
         ll_bottom.visibility = View.VISIBLE
@@ -191,14 +202,23 @@ class ComicPreViewActivity : BaseVMActivity(), View.OnClickListener,
     private fun switchRightMenu() {
         if (ll_right_layout.translationX != 0f) {
             if (rv_right_list.adapter == null && mAllChapterList != null) {
-                val adapter = RightChapterAdapter(mAllChapterList!!)
+                val adapter = ChapterAdapter(mAllChapterList!!, R.layout.item_chapter_right)
+                adapter.setOnItemChildClickListener(this)
                 rv_right_list.layoutManager = LinearLayoutManager(this)
                 adapter.bindToRecyclerView(rv_right_list)
             }
             ViewCompat.animate(ll_right_layout).translationX(0f).duration = 300
+            //跳转到最近阅读的章节位置
+            mAllChapterList?.indexOf(mCurrRequestNewChapterBean)?.apply {
+                if (this != -1) {
+                    rv_right_list.scrollToPosition(this)
+                    (rv_right_list.layoutManager as LinearLayoutManager)
+                            .scrollToPositionWithOffset(this, 0)
+                }
+            }
         } else {
             ViewCompat.animate(ll_right_layout).translationX(ll_right_layout.width.toFloat())
-                .duration = 300
+                    .duration = 300
         }
     }
 
@@ -226,6 +246,20 @@ class ComicPreViewActivity : BaseVMActivity(), View.OnClickListener,
                 toast(getString(R.string.last_tip))
             }
         }
+    }
+
+    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
+        /*adapter?.getItem(position)?.apply {
+            this as ComicDetailResponse.ChapterListBean
+            if (type == "3") {
+                toast(getString(R.string.no_support_vip_tip))
+            } else {
+                //保存阅读记录
+                mComicDetailResponse?.also {
+                    mDetailViewModel?.saveReadChapter(it.comic, this)
+                }
+            }
+        }*/
     }
 
 }
