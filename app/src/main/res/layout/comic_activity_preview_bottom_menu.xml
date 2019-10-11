@@ -55,19 +55,7 @@
                 android:drawableTop="@drawable/ic_brightness"
                 android:drawablePadding="@dimen/dist_2"
                 android:gravity="center_horizontal"
-                android:text="@string/brightness"
-                android:textSize="@dimen/sp_12" />
-
-            <TextView
-                android:id="@+id/tv_switch_screen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawableTop="@drawable/ic_change"
-                android:drawablePadding="@dimen/dist_2"
-                android:gravity="center_horizontal"
-                android:text="@string/change"
+                android:text="@string/brightness_night"
                 android:textSize="@dimen/sp_12" />
 
             <TextView
@@ -78,7 +66,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:drawableTop="@drawable/ic_module"
                 android:gravity="center"
-                android:text="@string/model"
+                android:text="@string/model_horizontal"
                 android:textSize="@dimen/sp_12" />
         </LinearLayout>
 

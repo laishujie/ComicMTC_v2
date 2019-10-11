@@ -6,10 +6,12 @@
 
     <string name="find">发现</string>
     <string name="search">搜索</string>
-    <string name="catalog">目录</string>
-    <string name="brightness">亮度</string>
+    <string name="catalog">漫画目录</string>
+    <string name="brightness_night">夜间模式</string>
+    <string name="brightness_system">跟随系统</string>
     <string name="change">切换</string>
-    <string name="model">模式</string>
+    <string name="model_horizontal">水平模式</string>
+    <string name="model_vertical">卷轴模式</string>
     <string name="preview">预览</string>
     <string name="clean_history">清除历史记录</string>
     <string name="click_input">点击输入</string>

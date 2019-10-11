@@ -4,9 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import com.gyf.barlibrary.ImmersionBar
+
+
 
 /**
  *
@@ -63,6 +66,18 @@ object ViewUtils {
         val h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
 
         view.measure(w, h)
+    }
+
+    // 根据亮度值修改当前window亮度
+    fun changeAppBrightness(context: Context, brightness: Int) {
+        val window = (context as Activity).window
+        val lp = window.attributes
+        if (brightness == -1) {
+            lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+        } else {
+            lp.screenBrightness = (if (brightness <= 0) 1 else brightness) / 255f
+        }
+        window.attributes = lp
     }
 
 }

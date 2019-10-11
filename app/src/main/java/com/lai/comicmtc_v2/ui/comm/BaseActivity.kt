@@ -85,6 +85,12 @@ abstract class BaseActivity : SupportActivity(), IBaseView {
     }
 
 
+    fun setToolBarTitle(toolBar: androidx.appcompat.widget.Toolbar, title: String?){
+        val tvTitle = toolBar.findViewById<TextView>(com.lai.comicmtc_v2.R.id.ac_title)
+        tvTitle?.text = title
+    }
+
+
     override fun showLoading() {
         if (this.isFinishing || this.isDestroyed) {
             return

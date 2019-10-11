@@ -128,11 +128,14 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
                 updateListRecordAndBtnUI(mCurrChapterPosition)
 
                 getAdapter<ChapterAdapter>(rv_list)?.apply {
+
                     ComicPreViewActivity.openActivity(
                             this@ComicDetailActivity,
                             it,
                             data as List<ChapterListBean>,
-                            isReverseList)
+                            isReverseList,
+                            mComicDetailResponse?.comic
+                    )
                 }
             }
         })
@@ -198,14 +201,17 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
                 getAdapter<ChapterAdapter>(rv_list)?.apply {
                     if (mRecentReadingChapter == null) {
                         getItem(0)?.also {
-                            ComicPreViewActivity.openActivity(this@ComicDetailActivity, it, data, isReverseList)
+                            ComicPreViewActivity.openActivity(this@ComicDetailActivity, it, data, isReverseList,
+                                    mComicDetailResponse?.comic
+                            )
                         }
                     } else {
                         ComicPreViewActivity.openActivity(
                                 this@ComicDetailActivity,
                                 mRecentReadingChapter,
                                 data,
-                                isReverseList
+                                isReverseList,
+                                mComicDetailResponse?.comic
                         )
                     }
                 }
