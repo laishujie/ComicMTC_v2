@@ -27,6 +27,8 @@ class ComicDetailViewModel : BaseViewModel() {
     var mSaveReadChapter = MutableLiveData<ComicDetailResponse.ChapterListBean?>()
 
     var mLastChapterBean = MutableLiveData<ComicDetailResponse.ChapterListBean?>()
+    //收藏 true 已收藏 false 收藏
+    var mSaveCollection = MutableLiveData<Boolean>()
 
     private val mBookDao by lazy {
         BookDao()
@@ -48,7 +50,7 @@ class ComicDetailViewModel : BaseViewModel() {
     }
 
 
-    fun setIsRead(
+    private fun setIsRead(
         requestList: List<ComicDetailResponse.ChapterListBean>,
         dbList: List<*>
     ): List<ComicDetailResponse.ChapterListBean> {
@@ -80,6 +82,27 @@ class ComicDetailViewModel : BaseViewModel() {
         }
     }
 
+    fun saveAndCancelCollection(comicBean: ComicDetailResponse.ComicBean) {
+        viewModelScope.launch {
+            mSaveCollection.value = withContext(Dispatchers.IO) {
+                val findCollection = mBookDao.findCollection(comicBean.comic_id)
+                if (findCollection == null) {
+                    return@withContext mBookDao.saveCollection(comicBean)
+                } else {
+                    return@withContext mBookDao.deleteCollection(comicBean.comic_id) == 0
+                }
+            }
+        }
+    }
+
+    fun getCollectionStatus(comicBean: ComicDetailResponse.ComicBean) {
+        viewModelScope.launch {
+            mSaveCollection.value = withContext(Dispatchers.IO) {
+                return@withContext mBookDao.findCollection(comicBean.comic_id) != null
+            }
+        }
+    }
+
 
     /**
      * 保存阅读记录
@@ -90,7 +113,11 @@ class ComicDetailViewModel : BaseViewModel() {
     ) {
         viewModelScope.launch {
             mSaveReadChapter.value = withContext(Dispatchers.IO) {
-                if (!mBookDao.saveReadChapter(book, chapterListBean)) {
+                if (!mBookDao.saveReadChapter(
+                        book.comic_id, book.name, chapterListBean.chapter_id
+                        , chapterListBean.name, chapterListBean.type
+                    )
+                ) {
                     return@withContext null
                 }
                 chapterListBean

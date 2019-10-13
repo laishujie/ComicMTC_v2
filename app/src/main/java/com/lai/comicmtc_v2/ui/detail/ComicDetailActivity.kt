@@ -13,6 +13,7 @@ import com.gyf.barlibrary.ImmersionBar
 import com.lai.comicmtc_v2.R
 import com.lai.comicmtc_v2.bean.detail.ComicDetailResponse
 import com.lai.comicmtc_v2.bean.detail.ComicDetailResponse.ChapterListBean
+import com.lai.comicmtc_v2.ui.comm.ActivityLauncher
 import com.lai.comicmtc_v2.ui.comm.BaseVMActivity
 import com.lai.comicmtc_v2.ui.home.HomeSortItemDecoration
 import com.lai.comicmtc_v2.ui.preview.ComicPreViewActivity
@@ -31,7 +32,7 @@ import kotlin.math.abs
  *
  */
 class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickListener,
-        View.OnClickListener {
+    View.OnClickListener {
 
     //详情ViewModel
     private var mDetailViewModel: ComicDetailViewModel? = null
@@ -46,6 +47,18 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
 
     //是否翻转过list
     private var isReverseList = false
+
+    //activity result call
+    private val resultCall = object : ActivityLauncher.Callback {
+        override fun onActivityResult(resultCode: Int, data: Intent?) {
+            data?.apply {
+                val booleanExtra = getBooleanExtra(ComicPreViewActivity.NEED_UPDATE_DETAIL, false)
+                if (booleanExtra) {
+                    request()
+                }
+            }
+        }
+    }
 
     companion object {
         const val COMIC_ID = "comicId"
@@ -88,36 +101,40 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
         mDetailViewModel?.mComicDetailResponse?.observe(this, Observer {
             hideLoading()
 
-            mComicDetailResponse = it
-
             val comic = it.comic
-            //获取是否有最近的阅读记录
-            mDetailViewModel?.getLastChapter(it.comic.comic_id)
 
-            GlideUtils.loadImage(this, comic.cover, iv_cover, 0f)
-            tv_title.text = comic.name
-            tv_author.text = comic.author.name
-            tv_des_content.text = comic.description
-            GlideUtils.loadImage(this, comic.wideCover, iv_bg, 0f)
-
-            val chapterAdapter = ChapterAdapter(it.chapter_list)
-            chapterAdapter.onItemChildClickListener = this
-            rv_list.layoutManager = GridLayoutManager(this, 2)
-            rv_list.addItemDecoration(ChapterDecoration())
-            chapterAdapter.bindToRecyclerView(rv_list)
-
-            it.comic.classifyTags?.also { list ->
-                val tagAdapter = TagAdapter(list)
-                rv_tag_list.layoutManager =
+            if (mComicDetailResponse == null) {
+                mComicDetailResponse = it
+                GlideUtils.loadImage(this, comic.cover, iv_cover, 0f)
+                tv_title.text = comic.name
+                tv_author.text = comic.author.name
+                tv_des_content.text = comic.description
+                GlideUtils.loadImage(this, comic.wideCover, iv_bg, 0f)
+                comic.classifyTags?.also { list ->
+                    val tagAdapter = TagAdapter(list)
+                    rv_tag_list.layoutManager =
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                rv_tag_list.addItemDecoration(
+                    rv_tag_list.addItemDecoration(
                         HomeSortItemDecoration(
-                                DisplayUtils.dp2px(5f)
-                                , DisplayUtils.dp2px(15f), DisplayUtils.dp2px(15f)
+                            DisplayUtils.dp2px(5f)
+                            , DisplayUtils.dp2px(15f), DisplayUtils.dp2px(15f)
                         )
-                )
-                tagAdapter.bindToRecyclerView(rv_tag_list)
+                    )
+                    tagAdapter.bindToRecyclerView(rv_tag_list)
+                }
+                val chapterAdapter = ChapterAdapter(it.chapter_list)
+                chapterAdapter.onItemChildClickListener = this
+                rv_list.layoutManager = GridLayoutManager(this, 2)
+                rv_list.addItemDecoration(ChapterDecoration())
+                chapterAdapter.bindToRecyclerView(rv_list)
+            } else {
+                getAdapter<ChapterAdapter>(rv_list)?.apply {
+                    setNewData(it.chapter_list)
+                }
             }
+            //获取是否有最近的阅读记录
+            mDetailViewModel?.getLastChapter(comic.comic_id)
+            mDetailViewModel?.getCollectionStatus(comic)
         })
 
         //监控保存阅读记录返回来的数据
@@ -128,14 +145,13 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
                 updateListRecordAndBtnUI(mCurrChapterPosition)
 
                 getAdapter<ChapterAdapter>(rv_list)?.apply {
-
                     ComicPreViewActivity.openActivity(
-                            this@ComicDetailActivity,
-                            it,
-                            data as List<ChapterListBean>,
-                            isReverseList,
-                            mComicDetailResponse?.comic
-                    )
+                        this@ComicDetailActivity,
+                        it,
+                        data as List<ChapterListBean>,
+                        isReverseList,
+                        mComicDetailResponse?.comic
+                    ,resultCall)
                 }
             }
         })
@@ -149,10 +165,16 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
             }
         })
 
+        mDetailViewModel?.mSaveCollection?.observe(this, Observer {
+            val text = if(it) "已收藏" else "收藏"
+            tv_favorite.text = text
+        })
+
         request()
 
         iv_reverse.setOnClickListener(this)
         btn_preview.setOnClickListener(this)
+        tv_favorite.setOnClickListener(this)
     }
 
     /**
@@ -201,19 +223,25 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
                 getAdapter<ChapterAdapter>(rv_list)?.apply {
                     if (mRecentReadingChapter == null) {
                         getItem(0)?.also {
-                            ComicPreViewActivity.openActivity(this@ComicDetailActivity, it, data, isReverseList,
-                                    mComicDetailResponse?.comic
-                            )
+                            //保存阅读记录
+                            mComicDetailResponse?.also { response ->
+                                mDetailViewModel?.saveReadChapter(response.comic, it)
+                            }
                         }
                     } else {
                         ComicPreViewActivity.openActivity(
-                                this@ComicDetailActivity,
-                                mRecentReadingChapter,
-                                data,
-                                isReverseList,
-                                mComicDetailResponse?.comic
-                        )
+                            this@ComicDetailActivity,
+                            mRecentReadingChapter,
+                            data,
+                            isReverseList,
+                            mComicDetailResponse?.comic,
+                                    resultCall)
                     }
+                }
+            }
+            R.id.tv_favorite->{
+                mComicDetailResponse?.comic?.apply {
+                    mDetailViewModel?.saveAndCancelCollection(this)
                 }
             }
         }

@@ -19,7 +19,7 @@
 		For example:
     	<version value="1" />
     -->
-    <version value="1" />
+    <version value="2" />
 
     <!--
     	Define your models in the list with mapping tag, LitePal will
@@ -33,6 +33,8 @@
     -->
     <list>
         <mapping class="com.lai.comicmtc_v2.db.ReadChapter" />
+        <mapping class="com.lai.comicmtc_v2.db.ComicCollection" />
+
         <!--  <mapping class="com.litepaltest.model.Classroom" />
               <mapping class="com.litepaltest.model.Teacher" />
               <mapping class="com.litepaltest.model.IdCard" />

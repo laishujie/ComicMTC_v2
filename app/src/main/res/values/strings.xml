@@ -2,6 +2,8 @@
     <string name="app_name">ComicMTC_v2</string>
     <string name="tag_home">首页</string>
     <string name="tag_sort">分类</string>
+    <string name="tag_collection">收藏</string>
+
     <string name="text_loading">loading</string>
 
     <string name="find">发现</string>

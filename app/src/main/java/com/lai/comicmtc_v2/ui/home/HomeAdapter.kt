@@ -28,7 +28,6 @@ class HomeAdapter(data: List<HomeTypeInfo>) : BaseMultiItemQuickAdapter<HomeType
         addItemType(HomeTypeInfo.CONTENT_1, R.layout.item_type_content_1)
         addItemType(HomeTypeInfo.BANNER, R.layout.item_type_banner)
         addItemType(HomeTypeInfo.CONTENT_2, R.layout.iten_tyoe_content_2)
-
     }
 
     init {
@@ -72,7 +71,8 @@ class HomeAdapter(data: List<HomeTypeInfo>) : BaseMultiItemQuickAdapter<HomeType
                         setText(R.id.tv_title, it.comic?.name)
                         setGone(R.id.v_item_right_bg, DecorationUtils.isFirstColumn(3, it.listIndex))
                         setGone(R.id.v_item_left_bg, DecorationUtils.isLastColumn(recyclerView, it.listIndex, 3))
-                        GlideUtils.loadImage(mContext, it.comic?.cover, getView<ImageView>(R.id.iv_cover),
+                        addOnClickListener(R.id.iv_cover)
+                        GlideUtils.loadImage(mContext, it.comic?.cover, getView(R.id.iv_cover),
                                 0f)
                     }
                     HomeTypeInfo.BANNER -> {
@@ -81,7 +81,8 @@ class HomeAdapter(data: List<HomeTypeInfo>) : BaseMultiItemQuickAdapter<HomeType
                                 0f)
                     }
                     HomeTypeInfo.CONTENT_2 -> {
-                        GlideUtils.loadImage(mContext, it.comic?.cover, getView<ImageView>(R.id.iv_cover),
+                        addOnClickListener(R.id.iv_cover)
+                        GlideUtils.loadImage(mContext, it.comic?.cover, getView(R.id.iv_cover),
                                 0f)
                         setText(R.id.tv_title, it.comic?.name)
                                 .setText(R.id.tv_sub_title, it.comic?.subTitle)

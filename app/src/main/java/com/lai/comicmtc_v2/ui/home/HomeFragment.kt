@@ -24,11 +24,10 @@ import kotlin.math.abs
  * @author  Lai
  *
  * @time 2019/9/22 17:00
- * @describe describe
+ * @describe 首页fragment
  *
  */
 class HomeFragment : BaseVMFragment(), BaseQuickAdapter.OnItemChildClickListener {
-
 
     private var mHomeViewModel: HomeViewModel? = null
 
@@ -95,6 +94,11 @@ class HomeFragment : BaseVMFragment(), BaseQuickAdapter.OnItemChildClickListener
             is HomeListItemAdapter1->{
                 val item = adapter.getItem(position)
                 ComicDetailActivity.openActivity(_mActivity,item?.comicId)
+            }
+            is HomeAdapter->{
+                adapter.getItem(position)?.apply {
+                    ComicDetailActivity.openActivity(_mActivity,comic?.comicId)
+                }
             }
         }
     }

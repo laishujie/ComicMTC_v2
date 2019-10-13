@@ -21,7 +21,7 @@ import kotlin.math.roundToInt
  * @author  Lai
  *
  * @time 2019/10/4 15:23
- * @describe describe
+ * @describe 预览
  *
  */
 class ComicPreAdapter(data: List<ComicPreViewResponse.ImageListBean>) :
@@ -41,7 +41,7 @@ class ComicPreAdapter(data: List<ComicPreViewResponse.ImageListBean>) :
                 val layoutParams = imageView.layoutParams
                 layoutParams.height = vh
                 imageView.layoutParams = layoutParams
-                setText(R.id.tv_position,adapterPosition.toString())
+                setText(R.id.tv_position,it.listIndex.toString())
                 setGone(R.id.tv_position, true)
                 GlideUtils.loadImage(mContext, it.img50, 0f, R.color.black, R.color.black, it.width, it.height,
                         object : CustomViewTarget<ImageView, Bitmap>(imageView) {

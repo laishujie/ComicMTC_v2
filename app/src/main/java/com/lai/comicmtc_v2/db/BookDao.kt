@@ -2,6 +2,7 @@ package com.lai.comicmtc_v2.db
 
 import com.lai.comicmtc_v2.bean.detail.ComicDetailResponse
 import org.litepal.LitePal
+import org.litepal.extension.findFirst
 
 /**
  *
@@ -14,35 +15,21 @@ import org.litepal.LitePal
 class BookDao {
 
     /**
-     * 保存chapter
+     * 保存chapter阅读记录
      */
     fun saveReadChapter(
-        book: ComicDetailResponse.ComicBean,
-        chapterListBean: ComicDetailResponse.ChapterListBean
-    ): Boolean {
-        val chapter = ReadChapter()
-        chapter.comicId = book.comic_id
-        chapter.comicName = book.name
-        chapter.chapter_id = chapterListBean.chapter_id
-        chapter.chapterName = chapterListBean.name
-        chapter.type = chapterListBean.type
-        return chapter.save()
-    }
-
-    /**
-     * 保存chapter
-     */
-    fun saveReadChapter(
-            comicId: String,
-            comicName: String,
-            chapterListBean: ComicDetailResponse.ChapterListBean
+        comicId: String,
+        comicName: String,
+        chapter_id: String,
+        chapterName: String,
+        type: String
     ): Boolean {
         val chapter = ReadChapter()
         chapter.comicId = comicId
         chapter.comicName = comicName
-        chapter.chapter_id = chapterListBean.chapter_id
-        chapter.chapterName = chapterListBean.name
-        chapter.type = chapterListBean.type
+        chapter.chapter_id = chapter_id
+        chapter.chapterName = chapterName
+        chapter.type = type
         return chapter.save()
     }
 
@@ -58,6 +45,48 @@ class BookDao {
      */
     fun finReadChapterList(comicId: String?): List<ReadChapter> {
         return LitePal.where("comicId=?", comicId).find(ReadChapter::class.java)
+    }
+
+    /**
+     * 保存阅读位置
+     */
+    fun saveReadPosition(chapter_id: String, position: Int): Boolean {
+        LitePal.where("chapter_id=?", chapter_id).find(ReadChapter::class.java)?.apply {
+            if (this.isNotEmpty()) {
+                val bean = get(0)
+                bean.readPosition = position
+                return bean.save()
+            }
+        }
+        return false
+    }
+
+    fun finReadChapterById(chapter_id: String): ReadChapter? {
+        LitePal.where("chapter_id=?", chapter_id).find(ReadChapter::class.java)?.apply {
+            if (this.isNotEmpty()) {
+               return get(0)
+            }
+        }
+        return null
+    }
+
+    fun saveCollection(comicBean: ComicDetailResponse.ComicBean):Boolean{
+        val collection = ComicCollection()
+        collection.comicId = comicBean.comic_id
+        collection.comicName = comicBean.name
+        collection.coverUrl = comicBean.cover
+        return  collection.save()
+    }
+
+    fun findCollection(comicId:String):ComicCollection?{
+       return  LitePal.where("comicId=?", comicId).findFirst<ComicCollection>()
+    }
+
+    fun  deleteCollection(comicId:String):Int{
+        findCollection(comicId)?.apply {
+            return delete()
+        }
+        return 0
     }
 
 

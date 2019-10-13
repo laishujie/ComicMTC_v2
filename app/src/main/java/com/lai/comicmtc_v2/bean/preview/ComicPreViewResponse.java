@@ -18,6 +18,16 @@ public class ComicPreViewResponse {
     private int status;
     private String chapter_id;
     private String type;
+    private int position;
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     private List<ImageListBean> image_list;
 
     public int getStatus() {
@@ -75,8 +85,17 @@ public class ComicPreViewResponse {
         private String type;
         private String img05;
         private String img50;
-        private String comicName;
+        private String chapterName;
         private int listSize;
+        private String chapter_id;
+
+        public String getChapter_id() {
+            return chapter_id;
+        }
+
+        public void setChapter_id(String chapter_id) {
+            this.chapter_id = chapter_id;
+        }
 
         public int getListSize() {
             return listSize;
@@ -96,12 +115,12 @@ public class ComicPreViewResponse {
 
         private int listIndex;
 
-        public String getComicName() {
-            return comicName;
+        public String getChapterName() {
+            return chapterName;
         }
 
-        public void setComicName(String comicName) {
-            this.comicName = comicName;
+        public void setChapterName(String chapterName) {
+            this.chapterName = chapterName;
         }
 
 
