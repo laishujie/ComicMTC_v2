@@ -65,6 +65,7 @@ class ComicPreViewViewModel : BaseViewModel() {
                 chapterName, type
             )
         return false
+
     }
 
 

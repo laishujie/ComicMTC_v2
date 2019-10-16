@@ -38,6 +38,12 @@
 
     <color name="color_979feb_press">#AFB5E9</color>
 
+    <color name="color_353535">#ff353535</color>
+
+    <color name="color_4dd8">#4dd8d8d8</color>
+
+    <color name="color_edeff2">#edeff2</color>
+    <color name="color_999999"> #999999</color>
 
 
 </resources>

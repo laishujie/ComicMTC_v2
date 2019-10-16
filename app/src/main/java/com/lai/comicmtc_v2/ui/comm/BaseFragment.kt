@@ -50,6 +50,7 @@ abstract class BaseFragment : SupportFragment(), IBaseView {
     }
 
 
+
     /**
      * fragment可见
      */

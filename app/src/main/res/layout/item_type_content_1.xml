@@ -8,7 +8,7 @@
     <View
         android:id="@+id/v_item_right_bg"
         android:layout_width="@dimen/dist_24"
-        android:layout_height="@dimen/dist_170"
+        android:layout_height="@dimen/dist_145"
         android:visibility="gone"
         android:background="@drawable/bg_book_right"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
@@ -18,15 +18,15 @@
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="@dimen/dist_170"
+        android:layout_height="@dimen/dist_145"
         android:background="@drawable/bg_book_m"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/dist_100"
-            android:layout_height="@dimen/dist_155"
+            android:layout_width="@dimen/dist_90"
+            android:layout_height="@dimen/dist_130"
             android:layout_gravity="center"
             app:cardBackgroundColor="@null"
             app:cardCornerRadius="8dp"
@@ -63,7 +63,7 @@
     <View
         android:id="@+id/v_item_left_bg"
         android:layout_width="@dimen/dist_24"
-        android:layout_height="@dimen/dist_170"
+        android:layout_height="@dimen/dist_145"
         android:visibility="gone"
         android:background="@drawable/bg_book_left"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout"

@@ -3,6 +3,7 @@ package com.lai.comicmtc_v2.ui.detail
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -37,7 +38,7 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
     //详情ViewModel
     private var mDetailViewModel: ComicDetailViewModel? = null
     //当前的漫画id
-    private var mComicId: Int = 0
+    private var mComicId: String = ""
     //请求回来的详情
     private var mComicDetailResponse: ComicDetailResponse? = null
     //最近阅读的书
@@ -63,7 +64,7 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
     companion object {
         const val COMIC_ID = "comicId"
 
-        fun openActivity(content: Activity, comId: Int?) {
+        fun openActivity(content: Activity, comId: String?) {
             val intent = Intent(content, ComicDetailActivity::class.java)
             intent.putExtra(COMIC_ID, comId)
             content.startActivity(intent)
@@ -76,8 +77,8 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        mComicId = intent.getIntExtra(COMIC_ID, 0)
-        if (mComicId == 0) {
+        mComicId = intent.getStringExtra(COMIC_ID)
+        if (TextUtils.isEmpty(mComicId)) {
             toast("id为空")
             finish()
         }
@@ -135,6 +136,7 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
             //获取是否有最近的阅读记录
             mDetailViewModel?.getLastChapter(comic.comic_id)
             mDetailViewModel?.getCollectionStatus(comic)
+            mDetailViewModel?.saveHistoryRecord(comic)
         })
 
         //监控保存阅读记录返回来的数据
@@ -240,8 +242,9 @@ class ComicDetailActivity : BaseVMActivity(), BaseQuickAdapter.OnItemChildClickL
                 }
             }
             R.id.tv_favorite->{
-                mComicDetailResponse?.comic?.apply {
-                    mDetailViewModel?.saveAndCancelCollection(this)
+                mComicDetailResponse?.apply {
+                    val listPosition = chapter_list.indexOf(mRecentReadingChapter)
+                    mDetailViewModel?.saveAndCancelCollection(comic,chapter_list.size,listPosition)
                 }
             }
         }

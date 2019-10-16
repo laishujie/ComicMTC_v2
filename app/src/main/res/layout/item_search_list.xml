@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:toos="http://schemas.android.com/tools"
+    android:id="@+id/cl_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="@dimen/dist_90"
+        android:layout_height="@dimen/dist_130"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/dist_15"
+        android:layout_marginTop="@dimen/dist_10"
+        app:cardBackgroundColor="@null"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.lai.comicmtc_v2.ui.widget.BookView
+            android:id="@+id/iv_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_chapter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shape_black_up_shadow"
+            android:gravity="center"
+            android:padding="@dimen/dist_5"
+            android:singleLine="true"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize_12" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dist_15"
+        android:layout_marginTop="@dimen/dist_15"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/textSize_18"
+        app:layout_constraintStart_toEndOf="@id/cardView"
+        app:layout_constraintTop_toTopOf="@id/cardView"
+        toos:text="@string/app_name" />
+
+    <TextView
+        android:id="@+id/tv_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dist_5"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:lineSpacingExtra="@dimen/dist_5"
+        toos:text="@string/app_name"
+        android:textSize="@dimen/textSize_10"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="@dimen/dist_0"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/dist_5"
+        android:background="#e5e5e5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_author" />
+
+    <TextView
+        android:id="@+id/tv_des_content"
+        android:layout_width="@dimen/dist_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dist_15"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:minLines="3"
+        android:textColor="#999999"
+        android:textSize="@dimen/textSize_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        toos:text="asd" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

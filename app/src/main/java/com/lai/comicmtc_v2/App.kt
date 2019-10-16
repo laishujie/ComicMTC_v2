@@ -9,6 +9,9 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.LogStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import org.litepal.LitePal
 import kotlin.properties.Delegates
 
@@ -25,13 +28,23 @@ class App : Application() {
         super.onCreate()
         CONTEXT = applicationContext
         initLogger()
-        InItDB()
+        inItDb()
+    }
+
+    init {
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+            ClassicsHeader(context)
+        }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, _ ->
+              ClassicsFooter(context).setDrawableSize(20f)
+        }
     }
 
 
-    private fun InItDB(){
+    private fun inItDb(){
         LitePal.initialize(this)
     }
+
 
     /**
      * 初始化日志框架

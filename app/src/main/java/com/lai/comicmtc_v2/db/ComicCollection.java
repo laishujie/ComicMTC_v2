@@ -12,6 +12,24 @@ public class ComicCollection extends LitePalSupport {
     private String comicId;
     private String comicName;
     private String coverUrl;
+    private int comicSize;
+    private int readChapterPosition;
+
+    public int getComicSize() {
+        return comicSize;
+    }
+
+    public void setComicSize(int comicSize) {
+        this.comicSize = comicSize;
+    }
+
+    public int getReadChapterPosition() {
+        return readChapterPosition;
+    }
+
+    public void setReadChapterPosition(int readChapterPosition) {
+        this.readChapterPosition = readChapterPosition;
+    }
 
     public String getComicId() {
         return comicId;

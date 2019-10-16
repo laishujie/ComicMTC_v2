@@ -1,209 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/refreshLayout"
     android:layout_height="match_parent">
 
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_layout"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title=" ">
+            app:elevation="0dp">
 
-
-            <com.stx.xhb.androidx.XBanner
-                android:id="@+id/x_banner"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dist_250"
-                app:AutoPlayTime="3000"
-                app:isShowIndicatorOnlyOne="true"
-                app:isShowNumberIndicator="true"
-                app:pageChangeDuration="800"
-                app:pointTopBottomPadding="@dimen/dist_10"
-                app:pointsPosition="RIGHT"
-                app:tipTextSize="12sp" />
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/tl_bar"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_fafafa"
-                android:visibility="invisible"
-                app:layout_collapseMode="pin" />
-
-            <com.lai.comicmtc_v2.ui.widget.ArcsView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dist_25"
-                android:layout_gravity="bottom"
-                app:layout_collapseMode="pin" />
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title=" ">
 
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+                <com.stx.xhb.androidx.XBanner
+                    android:id="@+id/x_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dist_250"
+                    app:AutoPlayTime="3000"
+                    app:isShowIndicatorOnlyOne="true"
+                    app:isShowNumberIndicator="true"
+                    app:pageChangeDuration="800"
+                    app:pointTopBottomPadding="@dimen/dist_10"
+                    app:pointsPosition="RIGHT"
+                    app:tipTextSize="12sp" />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/tl_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_fafafa"
+                    android:visibility="invisible"
+                    app:layout_collapseMode="pin" />
+
+                <com.lai.comicmtc_v2.ui.widget.ArcsView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dist_25"
+                    android:layout_gravity="bottom"
+                    app:layout_collapseMode="pin" />
 
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ll_root"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior=".ui.comm.RootIconBehavior">
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <com.coorchice.library.SuperTextView
-            android:id="@+id/tv_search"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dist_32"
-            android:layout_marginStart="@dimen/dist_16"
-            android:layout_marginTop="@dimen/dist_12"
-            android:layout_marginEnd="@dimen/dist_16"
-            android:gravity="center"
-            android:text="搜索"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:stv_corner="@dimen/dist_30"
-            app:stv_solid="@color/white_30" />
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
-        <LinearLayout
-            android:id="@+id/top_layout_1"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ll_root"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dist_15"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toStartOf="@id/top_layout_2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_search">
+            app:layout_behavior=".ui.comm.RootIconBehavior">
 
-            <ImageView
-                android:id="@+id/iv_1"
-                android:layout_width="@dimen/dist_30"
-                android:layout_height="@dimen/dist_30"
-                android:scaleType="centerInside"
-                android:src="@mipmap/icon_discover_column_rank_white" />
-
-            <TextView
-                android:id="@+id/tv_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/dist_5"
+            <com.coorchice.library.SuperTextView
+                android:id="@+id/tv_search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dist_32"
+                android:layout_marginStart="@dimen/dist_16"
+                android:layout_marginTop="@dimen/dist_12"
+                android:layout_marginEnd="@dimen/dist_16"
                 android:gravity="center"
-                android:text="排行"
+                android:text="搜索"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_12" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/top_layout_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dist_15"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/top_layout_3"
-            app:layout_constraintStart_toEndOf="@id/top_layout_1"
-            app:layout_constraintTop_toBottomOf="@+id/tv_search">
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:stv_corner="@dimen/dist_30"
+                app:stv_solid="@color/white_30" />
 
 
-            <ImageView
-                android:id="@+id/iv_2"
-                android:layout_width="@dimen/dist_30"
-                android:layout_height="@dimen/dist_30"
-                android:scaleType="centerInside"
-                android:src="@mipmap/icon_discover_column_classify_white" />
-
-            <TextView
-                android:id="@+id/tv_2"
+            <LinearLayout
+                android:id="@+id/top_layout_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分类"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_12" />
+                android:layout_marginTop="@dimen/dist_15"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@id/top_layout_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_search">
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_1"
+                    android:layout_width="@dimen/dist_30"
+                    android:layout_height="@dimen/dist_30"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_discover_column_rank_white" />
 
-        <LinearLayout
-            android:id="@+id/top_layout_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dist_15"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/top_layout_4"
-            app:layout_constraintStart_toEndOf="@id/top_layout_2"
-            app:layout_constraintTop_toBottomOf="@+id/tv_search">
+                <TextView
+                    android:id="@+id/tv_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/dist_5"
+                    android:gravity="center"
+                    android:text="排行"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
 
-            <ImageView
-                android:id="@+id/iv_3"
-                android:layout_width="@dimen/dist_30"
-                android:layout_height="@dimen/dist_30"
-                android:scaleType="centerInside"
-                android:src="@mipmap/icon_discover_column_vip_white" />
-
-            <TextView
-                android:id="@+id/tv_3"
+            <LinearLayout
+                android:id="@+id/top_layout_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="会员"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_12" />
+                android:layout_marginTop="@dimen/dist_15"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/top_layout_3"
+                app:layout_constraintStart_toEndOf="@id/top_layout_1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_search">
 
-        </LinearLayout>
 
+                <ImageView
+                    android:id="@+id/iv_2"
+                    android:layout_width="@dimen/dist_30"
+                    android:layout_height="@dimen/dist_30"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_discover_column_classify_white" />
 
-        <LinearLayout
-            android:id="@+id/top_layout_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dist_15"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/top_layout_3"
-            app:layout_constraintTop_toBottomOf="@+id/tv_search">
+                <TextView
+                    android:id="@+id/tv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分类"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12" />
 
-            <ImageView
-                android:id="@+id/iv_4"
-                android:layout_width="@dimen/dist_30"
-                android:layout_height="@dimen/dist_30"
-                android:scaleType="centerInside"
-                android:src="@mipmap/icon_discover_column_subscribe_white" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_4"
+            <LinearLayout
+                android:id="@+id/top_layout_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="订阅"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_12" />
+                android:layout_marginTop="@dimen/dist_15"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/top_layout_4"
+                app:layout_constraintStart_toEndOf="@id/top_layout_2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_search">
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_3"
+                    android:layout_width="@dimen/dist_30"
+                    android:layout_height="@dimen/dist_30"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_discover_column_vip_white" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="39dp" />
+                <TextView
+                    android:id="@+id/tv_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="会员"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12" />
+
+            </LinearLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/top_layout_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dist_15"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/top_layout_3"
+                app:layout_constraintTop_toBottomOf="@+id/tv_search">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <ImageView
+                    android:id="@+id/iv_4"
+                    android:layout_width="@dimen/dist_30"
+                    android:layout_height="@dimen/dist_30"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_discover_column_subscribe_white" />
+
+                <TextView
+                    android:id="@+id/tv_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订阅"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="39dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

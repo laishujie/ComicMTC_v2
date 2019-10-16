@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <View
-        android:id="@+id/v_item_right_bg"
-        android:layout_width="@dimen/dist_20"
-        android:layout_height="@dimen/dist_150"
-        android:background="@drawable/bg_book_right"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-        app:layout_constraintEnd_toStartOf="@+id/frameLayout" />
-
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="@dimen/dist_100"
-        android:layout_height="@dimen/dist_150"
-        android:background="@drawable/bg_book_m"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dist_170"
+        android:layout_weight="1"
+        android:background="@drawable/bg_book_m">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/dist_90"
-            android:layout_height="@dimen/dist_130"
+            android:layout_width="@dimen/dist_100"
+            android:layout_height="@dimen/dist_155"
             android:layout_gravity="center"
             app:cardBackgroundColor="@null"
             app:cardCornerRadius="8dp"
@@ -53,20 +42,28 @@
                 android:textSize="@dimen/textSize_12" />
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="invisible">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_process" />
+
+
+            </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
-
     </FrameLayout>
-
-
-    <View
-        android:id="@+id/v_item_left_bg"
-        android:layout_width="@dimen/dist_20"
-        android:layout_height="@dimen/dist_150"
-        android:background="@drawable/bg_book_left"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-        app:layout_constraintStart_toEndOf="@+id/frameLayout" />
-
 
 </LinearLayout>

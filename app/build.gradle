@@ -82,6 +82,10 @@ dependencies {
 
     //数据库管理类
     implementation 'org.litepal.android:kotlin:3.0.0'
+    //刷新框架 1.1.0 androidx 版本
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-x'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    implementation 'me.jessyan:autosize:1.1.2'
 
 }

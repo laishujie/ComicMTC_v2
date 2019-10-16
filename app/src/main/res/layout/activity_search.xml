@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_status"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dist_0" />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dist_48"
+        android:layout_margin="@dimen/dist_8"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dist_40"
+            android:layout_height="@dimen/dist_40"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dist_2"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_back" />
+
+        <EditText
+            android:id="@+id/ed_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dist_40"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dist_44"
+            android:background="@null"
+            android:hint="@string/search_info"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:textColor="@color/color_353535"
+            android:textSize="@dimen/sp_16" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/ns_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dist_8"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dist_48"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/dist_16"
+                        android:paddingEnd="@dimen/dist_16"
+                        android:text="热门搜索"
+                        android:textColor="@color/color_353535"
+                        android:textSize="@dimen/sp_16" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dist_1"
+                        android:background="@color/color_4dd8" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_hot_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dist_5" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dist_1"
+                        android:background="@color/color_4dd8" />
+
+                    <TextView
+                        android:id="@+id/tv_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dist_48"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/dist_16"
+                        android:paddingEnd="@dimen/dist_16"
+                        android:text="历史记录"
+                        android:textColor="@color/color_353535"
+                        android:textSize="@dimen/sp_16" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dist_1"
+                        android:background="@color/color_4dd8" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_history_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/tv_search_result"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginStart="@dimen/dist_15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/dist_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_search_result" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

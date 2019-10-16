@@ -24,7 +24,16 @@
     <string name="no_support_vip_tip">不支持vip章节</string>
 
     <string name="save_chapter_fail">保存阅读记录失败</string>
-    
+
     <string name="read_on_str">继续：%s</string>
+
+    <string name="bookshelf">书架（%d）</string>
+
+    <string name="book_process">%d%%</string>
+
+    <string name="search_info">请输入</string>
+
+    <string name="search_info_tip">搜索（%s）共 %d 条记录</string>
+
 
 </resources>

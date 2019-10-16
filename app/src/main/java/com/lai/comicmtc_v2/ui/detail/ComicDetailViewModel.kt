@@ -34,7 +34,7 @@ class ComicDetailViewModel : BaseViewModel() {
         BookDao()
     }
 
-    fun getComicDetail(comicId: Int) {
+    fun getComicDetail(comicId: String) {
         request({
             val detailResponse = RetrofitClient.service.comicDetail(comicId)
             val returnData = detailResponse.data?.returnData
@@ -82,12 +82,12 @@ class ComicDetailViewModel : BaseViewModel() {
         }
     }
 
-    fun saveAndCancelCollection(comicBean: ComicDetailResponse.ComicBean) {
+    fun saveAndCancelCollection(comicBean: ComicDetailResponse.ComicBean,size:Int,readChapter:Int = -1) {
         viewModelScope.launch {
             mSaveCollection.value = withContext(Dispatchers.IO) {
                 val findCollection = mBookDao.findCollection(comicBean.comic_id)
                 if (findCollection == null) {
-                    return@withContext mBookDao.saveCollection(comicBean)
+                    return@withContext mBookDao.saveCollection(comicBean,size,readChapter)
                 } else {
                     return@withContext mBookDao.deleteCollection(comicBean.comic_id) == 0
                 }
@@ -105,7 +105,7 @@ class ComicDetailViewModel : BaseViewModel() {
 
 
     /**
-     * 保存阅读记录
+     * 保存章节阅读记录
      */
     fun saveReadChapter(
         book: ComicDetailResponse.ComicBean,
@@ -125,6 +125,15 @@ class ComicDetailViewModel : BaseViewModel() {
         }
     }
 
+
+    /**
+     * 保存历史记录
+     */
+    fun saveHistoryRecord(book: ComicDetailResponse.ComicBean){
+        viewModelScope.launch(Dispatchers.IO){
+            mBookDao.saveHistoryRecord(book)
+        }
+    }
 
     override fun onCleared() {
         super.onCleared()

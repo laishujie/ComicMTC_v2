@@ -14,8 +14,11 @@ import com.lai.comicmtc_v2.R
 import com.lai.comicmtc_v2.bean.home.RecommendResponse
 import com.lai.comicmtc_v2.ui.comm.BaseVMFragment
 import com.lai.comicmtc_v2.ui.detail.ComicDetailActivity
+import com.lai.comicmtc_v2.ui.search.SearchActivity
 import com.lai.comicmtc_v2.utils.DisplayUtils
 import com.lai.comicmtc_v2.utils.GlideUtils
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlin.math.abs
 
@@ -27,7 +30,9 @@ import kotlin.math.abs
  * @describe 首页fragment
  *
  */
-class HomeFragment : BaseVMFragment(), BaseQuickAdapter.OnItemChildClickListener {
+class HomeFragment : BaseVMFragment(), BaseQuickAdapter.OnItemChildClickListener,
+    OnRefreshListener, View.OnClickListener {
+
 
     private var mHomeViewModel: HomeViewModel? = null
 
@@ -43,6 +48,8 @@ class HomeFragment : BaseVMFragment(), BaseQuickAdapter.OnItemChildClickListener
         val params = ll_root.layoutParams as CoordinatorLayout.LayoutParams
         params.topMargin += statusBarHeight
         ll_root.layoutParams = params
+        refreshLayout.setEnableLoadMore(false)
+        refreshLayout.setOnRefreshListener(this)
 
         ImmersionBar.setTitleBar(_mActivity, tl_bar)
 
@@ -53,17 +60,29 @@ class HomeFragment : BaseVMFragment(), BaseQuickAdapter.OnItemChildClickListener
 
 
         mHomeViewModel?.mRecommendResponse?.observe(this, Observer {
+            refreshLayout.finishRefresh()
             hideLoading()
             it.galleryItems?.apply {
                 x_banner.setBannerData(this)
             }
         })
         mHomeViewModel?.mHomeList?.observe(this, Observer {
-            val homeAdapter = HomeAdapter(it)
-            rv_list.layoutManager = GridLayoutManager(_mActivity, 6)
-            rv_list.addItemDecoration(HomeDecoration(DisplayUtils.dp2px(8f),DisplayUtils.dp2px(10f),DisplayUtils.dp2px(10f)))
-            homeAdapter.bindToRecyclerView(rv_list)
-            homeAdapter.onItemChildClickListener = this@HomeFragment
+            if (rv_list.adapter == null) {
+                val homeAdapter = HomeAdapter(it)
+                rv_list.layoutManager = GridLayoutManager(_mActivity, 6)
+                rv_list.addItemDecoration(
+                    HomeDecoration(
+                        DisplayUtils.dp2px(8f),
+                        DisplayUtils.dp2px(10f),
+                        DisplayUtils.dp2px(10f)
+                    )
+                )
+                homeAdapter.bindToRecyclerView(rv_list)
+                homeAdapter.onItemChildClickListener = this@HomeFragment
+            } else {
+                val adapter = rv_list.adapter as HomeAdapter
+                adapter.setNewData(it)
+            }
         })
 
 
@@ -72,7 +91,12 @@ class HomeFragment : BaseVMFragment(), BaseQuickAdapter.OnItemChildClickListener
             if (abs(verticalOffset) > sum) {
                 if (mToolBarDefaultStyle) {
                     tl_bar.visibility = View.VISIBLE
-                    tv_search.setTextColor(ContextCompat.getColor(_mActivity, R.color.color_ffbbbbbb))
+                    tv_search.setTextColor(
+                        ContextCompat.getColor(
+                            _mActivity,
+                            R.color.color_ffbbbbbb
+                        )
+                    )
                     tv_search.solid = ContextCompat.getColor(_mActivity, R.color.color_e6e6e6)
                     mToolBarDefaultStyle = !mToolBarDefaultStyle
                 }
@@ -85,28 +109,40 @@ class HomeFragment : BaseVMFragment(), BaseQuickAdapter.OnItemChildClickListener
                 }
             }
         })
-
+        tv_search.setOnClickListener(this)
         requestHome()
     }
 
     override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-        when(adapter){
-            is HomeListItemAdapter1->{
+        when (adapter) {
+            is HomeListItemAdapter1 -> {
                 val item = adapter.getItem(position)
-                ComicDetailActivity.openActivity(_mActivity,item?.comicId)
+                ComicDetailActivity.openActivity(_mActivity, item?.comicId.toString())
             }
-            is HomeAdapter->{
+            is HomeAdapter -> {
                 adapter.getItem(position)?.apply {
-                    ComicDetailActivity.openActivity(_mActivity,comic?.comicId)
+                    ComicDetailActivity.openActivity(_mActivity, comic?.comicId.toString())
                 }
             }
         }
+    }
+
+    override fun onRefresh(refreshLayout: RefreshLayout) {
+        requestHome()
     }
 
 
     private fun requestHome() {
         showLoading()
         mHomeViewModel?.getRecommend()
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.tv_search->{
+                SearchActivity.openActivity(_mActivity)
+            }
+        }
     }
 
 
