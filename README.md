@@ -1,20 +1,25 @@
 ## 简介
+  apk体验下载：<a href="https://gitee.com/LaiShuJie/APK/raw/master/app-mtc_v2-release.apk">COMIC-MVC_V2</a> 4.3M
+ </br>
 　在线漫画阅读器,项目采用 Kotlin+MVVM+LiveData+协程+Retrofit. 接口来自有妖气,以过滤vip的章节，此开源项目仅做学习交流使用。
+ 
+ 
+ 
  
  ## 应用截图
 <p align="center">
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/home.jpg" width="260"/>
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/detail.jpg" width="260"/>
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/preview.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/blob/master/home.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/blob/master/detail.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/blob/master/preview.jpg" width="260"/>
 </p>
 
 <p align="center">
 
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/bookShelft.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/blob/master/bookShelft.jpg" width="260"/>
 
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/search.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/blob/master/search.jpg" width="260"/>
 
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/search_list.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/blob/master/search_list.jpg" width="260"/>
 
 </p>
 
