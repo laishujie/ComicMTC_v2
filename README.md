@@ -1,6 +1,7 @@
 ## 简介
-  apk体验下载：<a href="https://gitee.com/LaiShuJie/APK/raw/master/app-mtc_v2-release.apk">COMIC-MVC_V2</a> 4.3M
- </br>
+
+  apk体验下载 4.3M ：<a href="https://gitee.com/LaiShuJie/APK/raw/master/app-mtc_v2-release.apk">COMIC-MVC_V2</a>
+ 
 　在线漫画阅读器,项目采用 Kotlin+MVVM+LiveData+协程+Retrofit. 接口来自有妖气,以过滤vip的章节，此开源项目仅做学习交流使用。
  
  
