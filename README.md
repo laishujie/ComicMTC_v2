@@ -1,6 +1,22 @@
 ## 简介
 　在线漫画阅读器,项目采用 Kotlin+MVVM+LiveData+协程+Retrofit. 接口来自有妖气,以过滤vip的章节，此开源项目仅做学习交流使用。
  
+ ## 应用截图
+<p align="center">
+<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/home.jpg" width="260"/>
+<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/detail.jpg" width="260"/>
+<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/preview.jpg" width="260"/>
+</p>
+
+<p align="center">
+
+<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/bookShelft.jpg" width="260"/>
+
+<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/search.jpg" width="260"/>
+
+<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/search_list.jpg" width="260"/>
+
+</p>
 ## 技术点
 - 使用ViewModel+LiveData.完成MVVM模式
 - 首页多布局+CoordinatorLayout+自定义Behavior，仿有妖气上滑移动特效
@@ -19,22 +35,7 @@
 - 项目：<a href="https://juejin.im/post/5cb473e66fb9a068af37a6ce#comment">Kotlin+MVVM+LiveData+协程 打造 Wanandroid</a>    
 
 
-## 应用截图
-<p align="center">
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/home.jpg" width="260"/>
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/detail.jpg" width="260"/>
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/preview.jpg" width="260"/>
-</p>
 
-<p align="center">
-
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/bookShelft.jpg" width="260"/>
-
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/search.jpg" width="260"/>
-
-<img src="https://github.com/laishujie/ComicMTC_v2/blob/master/screenshot/search_list.jpg" width="260"/>
-
-</p>
 
 
 ## 最后
