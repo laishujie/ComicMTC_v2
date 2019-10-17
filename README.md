@@ -1,10 +1,6 @@
-# ComicMTC_v2
-<h1 align="center">ComicMTC_v2_V2</h1>
-
 ## 简介
 　在线漫画阅读器,项目采用 Kotlin+MVVM+LiveData+协程+Retrofit. 接口来自有妖气,以过滤vip的章节，此开源项目仅做学习交流使用。
 
-如果对你有帮助不妨start支持一下.感谢ヽ(￣ω￣(￣ω￣〃)ゝ
 
 ## 应用截图
 <p align="center">
@@ -23,10 +19,25 @@
 
 </p>
 
+## 技术点
+- 使用ViewModel+LiveData.完成MVVM模式
+- 首页多布局+CoordinatorLayout+自定义Behavior，仿有妖气上滑移动特效
+- 采用Retrofit2+Kotlin-Coroutines进行网络请求
+- RecyclerView预加载
+- 等等
+
+
 ##  相关文章
 - <a href="https://blog.csdn.net/a8688555/article/details/101803861"> MVVM模式的理解/a>
 - <a href="https://blog.csdn.net/a8688555/article/details/100887063"> Android 关于一些首页复杂布局的写法</a>
 
+## 参考
+界面：有妖气 和  <a href="https://www.zcool.com.cn/>站酷</a>
+项目：<href="https://blog.csdn.net/a8688555/article/details/79407112"> Android 开源漫画项目ComicMTC</a>    
+项目：<href="https://juejin.im/post/5cb473e66fb9a068af37a6ce#comment"> Kotlin+MVVM+LiveData+协程 打造 Wanandroid</a>    
+
+## 最后
+如果对你有帮助不妨start支持一下.感谢ヽ(￣ω￣(￣ω￣〃)ゝ
 
 ## 声明
 　本项目部分API来自有妖气，以过滤vip，个人练手学习项目，此开源项目仅做学习交流使用, 不涉及任何商业用途，有如侵权，立即删除。
