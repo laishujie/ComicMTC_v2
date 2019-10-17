@@ -8,18 +8,18 @@
  
  ## 应用截图
 <p align="center">
-<img src="https://gitee.com/LaiShuJie/APK/blob/master/home.jpg" width="260"/>
-<img src="https://gitee.com/LaiShuJie/APK/blob/master/detail.jpg" width="260"/>
-<img src="https://gitee.com/LaiShuJie/APK/blob/master/preview.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/raw/master/home.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/raw/master/detail.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/raw/master/preview.jpg" width="260"/>
 </p>
 
 <p align="center">
 
-<img src="https://gitee.com/LaiShuJie/APK/blob/master/bookShelft.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/raw/master/bookShelft.jpg" width="260"/>
 
-<img src="https://gitee.com/LaiShuJie/APK/blob/master/search.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/raw/master/search.jpg" width="260"/>
 
-<img src="https://gitee.com/LaiShuJie/APK/blob/master/search_list.jpg" width="260"/>
+<img src="https://gitee.com/LaiShuJie/APK/raw/master/search_list.jpg" width="260"/>
 
 </p>
 
