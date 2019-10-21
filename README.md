@@ -8,6 +8,9 @@
  
  
  ## 应用截图
+ 
+要是截图看不到只能进入截图文件夹screenshot查看咯
+
 <p align="center">
 <img src="https://gitee.com/LaiShuJie/APK/raw/master/home.jpg" width="260"/>
 <img src="https://gitee.com/LaiShuJie/APK/raw/master/detail.jpg" width="260"/>
