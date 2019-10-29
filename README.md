@@ -45,9 +45,11 @@
 - 项目：<a href="https://juejin.im/post/5cb473e66fb9a068af37a6ce#comment">Kotlin+MVVM+LiveData+协程 打造 Wanandroid</a>    
 
 
-
 ## 最后
 如果对你有帮助不妨start支持一下.感谢ヽ(￣ω￣(￣ω￣〃)ゝ
+
+## 唠叨
+最新在想要不要把视频动漫这块接近来=v=!!!
 
 ## 声明
 　本项目部分API来自有妖气，以过滤vip，个人练手学习项目，此开源项目仅做学习交流使用, 不涉及任何商业用途，有如侵权，立即删除。
